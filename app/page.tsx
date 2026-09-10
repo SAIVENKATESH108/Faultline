@@ -276,6 +276,21 @@ export default function LandingPage() {
                 <span>📖 Misconception Codex</span>
               </Button>
             </Link>
+
+            <a
+              href="/Faultline_System_Documentation.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto"
+            >
+              <Button
+                variant="secondary"
+                size="lg"
+                className="w-full sm:w-auto font-mono text-sm px-5 py-3.5 h-auto bg-[var(--surface-1)] hover:bg-[var(--surface-2)] text-[var(--text-primary)] hover:text-[var(--ink-bright)] border border-[var(--mist)] hover:border-[var(--ink-border)] flex items-center justify-center gap-2 cursor-pointer shadow-xs transition-all"
+              >
+                <span>📄 System Docs (PDF)</span>
+              </Button>
+            </a>
           </div>
 
           {/* Quick Launch Topic Pills */}
@@ -745,6 +760,16 @@ export default function LandingPage() {
                 📖 Misconception Codex
               </Button>
             </Link>
+
+            <a
+              href="/Faultline_System_Documentation.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button variant="secondary" size="lg" className="font-mono text-sm px-6 py-3 border border-[var(--mist)] hover:border-[var(--ink-border)] text-[var(--text-primary)] hover:text-[var(--ink-bright)] cursor-pointer">
+                📄 System Docs (PDF)
+              </Button>
+            </a>
           </div>
         </div>
       </section>

@@ -83,12 +83,23 @@ export default function Navbar({ activeRoute = "/" }: NavbarProps) {
             })}
           </nav>
 
-          {/* Right: Engine Status Indicator + Global Theme Toggle */}
-          <div className="hidden md:flex items-center gap-3 shrink-0">
+          {/* Right: Engine Status Indicator + System Docs PDF + Global Theme Toggle */}
+          <div className="hidden md:flex items-center gap-2.5 shrink-0">
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--surface-2)] border border-[var(--mist)] text-xs font-mono text-[var(--text-secondary)]">
               <span className="w-2 h-2 rounded-full bg-[var(--stable-bright)] animate-pulse" />
               <span>Engine Ready</span>
             </div>
+            <a
+              href="/Faultline_System_Documentation.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[var(--surface-2)] border border-[var(--mist)] hover:border-[var(--ink-bright)] text-xs font-mono text-[var(--text-primary)] hover:text-[var(--ink-bright)] transition-all select-none"
+              title="Open Complete Engineering Specification & System Documentation PDF"
+            >
+              <span>📄</span>
+              <span className="hidden lg:inline">System</span>
+              <span>Docs (PDF)</span>
+            </a>
             <ThemeToggle showLabel={true} />
           </div>
         </div>
