@@ -1,0 +1,113 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─────────────────────────────────────────────
+// topics
+// A subject area that owns a concept tree
+// ─────────────────────────────────────────────
+model Topic {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  slug        String   @unique
+  title       String
+  description String?
+  source      String   @default("generated")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  conceptNodes ConceptNode[]
+
+  @@index([slug])
+  @@map("topics")
+}
+
+// ─────────────────────────────────────────────
+// concept_nodes
+// A single concept node within a topic's tree
+// ─────────────────────────────────────────────
+model ConceptNode {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  topicId     String   @map("topic_id") @db.Uuid
+  label       String
+  description String?
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  topic               Topic                @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  parentEdges         ConceptEdge[]        @relation("ParentNode")
+  childEdges          ConceptEdge[]        @relation("ChildNode")
+  diagnosticQuestions DiagnosticQuestion[]
+
+  @@map("concept_nodes")
+}
+
+// ─────────────────────────────────────────────
+// concept_edges
+// Directed edge in the concept graph (parent → child)
+// ─────────────────────────────────────────────
+model ConceptEdge {
+  id       String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  parentId String @map("parent_id") @db.Uuid
+  childId  String @map("child_id") @db.Uuid
+
+  parent ConceptNode @relation("ParentNode", fields: [parentId], references: [id], onDelete: Cascade)
+  child  ConceptNode @relation("ChildNode", fields: [childId], references: [id], onDelete: Cascade)
+
+  @@index([childId])
+  @@map("concept_edges")
+}
+
+// ─────────────────────────────────────────────
+// diagnostic_questions
+// MCQ question tied to a concept node
+// ─────────────────────────────────────────────
+model DiagnosticQuestion {
+  id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  conceptNodeId String   @map("concept_node_id") @db.Uuid
+  stem          String
+  correctAnswer String   @map("correct_answer")
+  explanation   String?
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  conceptNode       ConceptNode        @relation(fields: [conceptNodeId], references: [id], onDelete: Cascade)
+  distractors       Distractor[]
+  remediationCaches RemediationCache[]
+
+  @@map("diagnostic_questions")
+}
+
+// ─────────────────────────────────────────────
+// distractors
+// Wrong-answer options that encode a misconception
+// ─────────────────────────────────────────────
+model Distractor {
+  id              String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  questionId      String @map("question_id") @db.Uuid
+  text            String
+  misconceptionId String @map("misconception_id")
+
+  question DiagnosticQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@map("distractors")
+}
+
+// ─────────────────────────────────────────────
+// remediation_cache
+// LLM-generated remediation keyed by question + misconception
+// Unique on (question_id, misconception_id) to deduplicate cache hits
+// ─────────────────────────────────────────────
+model RemediationCache {
+  id              String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  questionId      String   @map("question_id") @db.Uuid
+  misconceptionId String   @map("misconception_id")
+  content         String
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  question DiagnosticQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([questionId, misconceptionId])
+  @@map("remediation_cache")
+}
