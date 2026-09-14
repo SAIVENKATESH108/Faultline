@@ -43,7 +43,7 @@ async function pgLookupRemediation(
   if (!questionId || !misconceptionId) return null;
 
   let attempts = 0;
-  let row: any = null;
+  let row: Awaited<ReturnType<typeof prisma.remediationCache.findUnique>> = null;
 
   while (attempts < 2) {
     try {

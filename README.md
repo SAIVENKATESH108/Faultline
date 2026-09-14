@@ -1,7 +1,8 @@
 # Faultline
 
 > **Adaptive Cognitive Compiler & Misconception Diagnosis Engine**  
-> *Debug the mind, not just the syntax.* Powered by **Google Gemini 3.5 Lite**, native compilers, and geological concept strata.
+> *Debug the mind, not just the syntax.* Powered by **Google Gemini 3.5 Lite**, native compilers, and geological concept strata.  
+> 🌐 **Live Deployment:** [https://faultline.vercel.app](https://faultline.vercel.app)
 
 ---
 

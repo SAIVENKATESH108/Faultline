@@ -32,9 +32,11 @@ export const viewport: Viewport = {
   ],
 };
 
+const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://faultline.vercel.app";
+
 // ── Comprehensive SEO Metadata ────────────────────────────────────────────────
 export const metadata: Metadata = {
-  metadataBase: new URL("https://faultline.dev"),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Faultline | Adaptive Cognitive Compiler & Misconception Diagnostics",
     template: "%s | Faultline",
@@ -61,7 +63,7 @@ export const metadata: Metadata = {
     "data structures",
     "algorithmic thinking"
   ],
-  authors: [{ name: "Faultline Core Team", url: "https://faultline.dev" }],
+  authors: [{ name: "Faultline Core Team", url: siteUrl }],
   creator: "Faultline",
   publisher: "Faultline",
   applicationName: "Faultline Cognitive Compiler",
@@ -78,7 +80,7 @@ export const metadata: Metadata = {
     title: "Faultline | Adaptive Cognitive Compiler & Misconception Diagnostics",
     description:
       "Stop fixing syntax errors. Debug your mental model with geological concept strata, native multi-language compilers, interactive stdin, and surgical AI Code Doctor.",
-    url: "https://faultline.dev",
+    url: siteUrl,
     siteName: "Faultline",
     images: [
       {

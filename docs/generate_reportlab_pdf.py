@@ -379,7 +379,7 @@ def build_pdf():
         quote_text="The Faultline landing interface serves as a live visual manifest of our platform's cognitive capabilities. Designed with modern obsidian glassmorphism, responsive 3D emblem rendering, and seamless day/night theme switching, it instantly communicates the rigor of our geological pedagogy to students, educators, and enterprise engineering leads.",
         why_needed="Educational platforms frequently fail due to uninspiring user interfaces that obscure their underlying technological depth. The Faultline landing architecture provides immediate visual and technical onboarding: featuring an interactive 3D crystal emblem, a Bento grid of core pillars, a 5-step cognitive pipeline, and instant access to native terminals.",
         workflow_steps=[
-            "Launch Interface: Access http://localhost:3000 to load the command center with hardware-accelerated theme synchronization.",
+            "Launch Interface: Access https://faultline.vercel.app to load the command center with hardware-accelerated theme synchronization.",
             "Interactive Showcase: Click through the 13 preview tabs in the Showcase Gallery to inspect active snapshots of Strata, Terminal, Doctor, and Codex views.",
             "Inspect Pillars & Pipeline: Review the 4-Pillar Bento Grid and 5-Step Remediation Pipeline to understand the pedagogical lifecycle.",
             "Direct Subsystem Routing: Click 'Launch Live Terminal' or 'Explore Cognitive Strata' to enter live debugging sessions."

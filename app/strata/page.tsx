@@ -4,12 +4,9 @@ import React, { useState, useEffect, useCallback, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import Navbar from "@/components/Navbar";
-import HeroScene from "@/components/HeroScene";
 import ConceptTree, { ConceptTreeSkeleton } from "@/components/ConceptTree";
 import QuestionCard from "@/components/QuestionCard";
-import ThemeToggle from "@/components/ThemeToggle";
 import { Button } from "@/components/ui/Button";
-import { Badge } from "@/components/ui/Badge";
 import { useConceptTree } from "@/hooks/useConceptTree";
 import { useAppStore } from "@/store/useAppStore";
 
@@ -87,11 +84,11 @@ function StrataContent() {
   };
 
   // Quick select topic
-  const handleSelectTopic = (topic: string) => {
+  const handleSelectTopic = useCallback((topic: string) => {
     setInputTopic(topic);
     setSubmittedTopic(topic);
     setActiveTopic(topic);
-  };
+  }, [setActiveTopic]);
 
   // Load pre-baked demo fixture
   const handleLoadDemo = useCallback(
@@ -99,7 +96,7 @@ function StrataContent() {
       if (e) e.preventDefault();
       handleSelectTopic("Pointer Arithmetic in C");
     },
-    []
+    [handleSelectTopic]
   );
 
   // Reset progress on current tree
